@@ -1,0 +1,51 @@
+﻿@model List<Pizza>
+
+<!--Intestazione immagine-->
+<div class="container-fluid">
+    <img src="~/img/nuovo_sfondo.jpg" style="width:100%;" class="img-fluid" alt="sfondo">
+</div>
+
+<!--Lista delle pizze-->
+<div class="container mt-3 mb-3">
+<h1 class="text-center text-uppercase mx-5">LE NOSTRE PIZZE</h1>
+    <div class="row my-3">
+
+    @if(Model.Count() == 0)
+    {
+            <h3>Non hai inserito nessuna Pizza</h3>
+    } 
+    else 
+    {     
+        @foreach(Pizza pizzaNellaLista in Model)
+        {
+            <div class="col-lg-4 col-md-6 col-xs-12 text-center">
+                <div class="card my-3">
+                    <img src=@pizzaNellaLista.Image class="card-img-top" alt="foto pizza">
+                    <div class="card-body">
+                        <h5 class="card-title">@pizzaNellaLista.Name</h5>
+                        <p><strong>@pizzaNellaLista.Price.ToString("N2") &euro;</strong></p>
+                        <a class="btn btn-light border border-dark me-3" href="@Url.Action("Details", "Pizza", new { id = pizzaNellaLista.Id })">Dettagli</a>
+                        <a class="btn btn-dark me-3" href="@Url.Action("Modify", "Pizza", new { id = pizzaNellaLista.Id })">Modifica</a>
+                        <form action="@Url.Action("Delete", "Pizza", new {id= pizzaNellaLista.Id})" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">Elimina</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+     }
+     </div>
+</div>
+
+<!--BOTTONE PER AGGIUNGERE PIZZE-->
+<div class="container mt-3 mb-3 text-center text-uppercase">
+    <h1>AGGIUNGI UNA PIZZA A QUELLE ELENCATE SOPRA CLICCANDO SUL BOTTONE</h1>
+    <a class="btn btn-dark" href="@Url.Action("Create", "Pizza")">
+        Nuova pizza
+    </a>  
+</div>
+
+        
+                       
+
