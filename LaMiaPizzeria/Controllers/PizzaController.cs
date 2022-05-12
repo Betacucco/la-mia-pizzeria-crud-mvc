@@ -92,11 +92,11 @@ namespace LaMiaPizzeria.Controllers
         [HttpPost]
         public IActionResult Delete(int id)
         {
-            int indidcePizzaDaRimuovere = IndexOfResearch(id);
+            int indicePizzaDaRimuovere = IndexOfResearch(id);
 
-            if(indidcePizzaDaRimuovere != -1)
+            if(indicePizzaDaRimuovere != -1)
             {
-                PizzaData.GetPizze().RemoveAt(indidcePizzaDaRimuovere);
+                PizzaData.GetPizze().RemoveAt(indicePizzaDaRimuovere);
             }
             else
             {
@@ -109,17 +109,17 @@ namespace LaMiaPizzeria.Controllers
         //METODO CEH RICERCA L'ID NELLA LISTA
         private int IndexOfResearch(int id)
         {
-            int indexToRemove = -1;
+            int indexToFind = -1;
             List<Pizza> pizzaList = PizzaData.GetPizze();
 
             for(int i = 0; i < pizzaList.Count; i++)
             {
                 if (pizzaList[i].Id == id)
                 {
-                    indexToRemove = i;
+                    indexToFind = i;
                 }
             }
-            return indexToRemove;
+            return indexToFind;
         }
 
         //METODO CHE RITORNA LA PIZZA TRAMITE ID

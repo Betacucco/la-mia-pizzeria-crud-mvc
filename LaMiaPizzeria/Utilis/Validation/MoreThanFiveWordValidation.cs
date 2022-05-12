@@ -9,7 +9,7 @@ namespace LaMiaPizzeria.Utilis.Validation
         {
             string fieldValue = (string)value;
 
-            if (fieldValue == null || fieldValue.Trim().Split(' ').Length - 1 <= 5)
+            if (fieldValue == null || fieldValue.Trim().Split(' ').Length < 5)
             {
                 return new ValidationResult("Il campo deve contenere almeno cinque parole");
             }
