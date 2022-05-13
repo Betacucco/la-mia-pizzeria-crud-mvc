@@ -17,7 +17,6 @@ namespace LaMiaPizzeria.Models
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Il campo immagine è obbligatorio")]
-        [Url(ErrorMessage = "Mi dispiace l'URL inserito non è valido")]
         public string Image { get; set; }
 
         [Required(ErrorMessage = "Il campo prezzo è obbligatorio")]

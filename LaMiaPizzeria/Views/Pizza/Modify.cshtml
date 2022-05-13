@@ -7,7 +7,7 @@
             <div class="d-flex align-items-center">
                 <h1 class="mt-3 mb-3">Nuova Pizza</h1>
             </div>
-            <form asp-controller="Pizza" asp-action="Modify" asp-route-id="@Model.Id" method="post">
+            <form action="@Url.Action("Modify", "Pizza")" method="post">
                 @Html.AntiForgeryToken()
                 <div class="col-12 mb-3">
                     <strong>Immagine:</strong>
@@ -25,7 +25,7 @@
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <strong>Contenuto:</strong>
+                    <strong>Descrizione:</strong>
                     <textarea asp-for="Description" rows="7" class="d-block w-100"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>

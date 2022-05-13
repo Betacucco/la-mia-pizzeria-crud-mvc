@@ -43,9 +43,9 @@ namespace LaMiaPizzeria.Controllers
                 return View("FormPizza", nuovaPizza);
             }
 
-            Pizza nuovaPizzaDaAggiungere = new Pizza(PizzaData.GetPizze().Count, nuovaPizza.Name, nuovaPizza.Description, nuovaPizza.Image, nuovaPizza.Price);
+            Pizza nuovaPizzaDaAggiungere = new Pizza(PizzaData.GetPizze().Count + 1, nuovaPizza.Name, nuovaPizza.Description, nuovaPizza.Image, nuovaPizza.Price);
             PizzaData.GetPizze().Add(nuovaPizzaDaAggiungere);
-
+            PizzaData.GetPizze().Sort((prezzo1, prezzo2) => prezzo1.Price.CompareTo(prezzo2.Price));
             return RedirectToAction("Index");
         }
 
@@ -106,7 +106,7 @@ namespace LaMiaPizzeria.Controllers
             return RedirectToAction("Index");
         }
 
-        //METODO CEH RICERCA L'ID NELLA LISTA
+        //METODO CHE RICERCA L'ID NELLA LISTA
         private int IndexOfResearch(int id)
         {
             int indexToFind = -1;
@@ -117,6 +117,7 @@ namespace LaMiaPizzeria.Controllers
                 if (pizzaList[i].Id == id)
                 {
                     indexToFind = i;
+                    break;
                 }
             }
             return indexToFind;
