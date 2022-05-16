@@ -1,11 +1,12 @@
 ﻿using LaMiaPizzeria.Utilis.Validation;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LaMiaPizzeria.Models
 {
     public class Pizza
     {
-        
+        [Key]
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Il campo nome è obbligatorio")]
@@ -13,6 +14,7 @@ namespace LaMiaPizzeria.Models
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Il campo descrizione è obbligatorio")]
+        [Column(TypeName = "text")]
         [MoreThanFiveWordValidation]
         public string Description { get; set; }
 
@@ -28,9 +30,8 @@ namespace LaMiaPizzeria.Models
 
         }
 
-        public Pizza(int id, string name, string ingredienti, string image, double prezzo)
+        public Pizza(string name, string ingredienti, string image, double prezzo)
         {
-            this.Id = id;
             this.Name = name;
             this.Description = ingredienti;
             this.Image = image;
