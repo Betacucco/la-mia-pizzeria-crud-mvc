@@ -26,6 +26,10 @@
                         <p><strong>@pizzaNellaLista.Price.ToString("N2") &euro;</strong></p>
                         <a class="btn btn-light border border-dark me-3" href="@Url.Action("Details", "Pizza", new { id = pizzaNellaLista.Id })">Dettagli</a>
                         <a class="btn btn-dark me-3" href="@Url.Action("Modify", "Pizza", new { id = pizzaNellaLista.Id })">Modifica</a>
+                         <form class="d-inline" action="@Url.Action("Post", "Favourites", new {id= pizzaNellaLista.Id})" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-warning">Preferiti</button>
+                        </form>
                         <form class="d-inline" action="@Url.Action("Delete", "Pizza", new {id= pizzaNellaLista.Id})" method="post">
                             @Html.AntiForgeryToken()
                             <button type="submit" class="btn btn-danger">Elimina</button>
@@ -45,6 +49,21 @@
     Nuova pizza
     </a>
 </div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        axios.post('/api/Favourites/Post', {
+            id: document.getElementById('id_pizza')
+        })
+            .then((response) => {
+                console.log(response);
+            }, (error) => {
+                console.log(error);
+            });
+          
+    </script>
+}
 
 
 
