@@ -25,6 +25,11 @@ namespace LaMiaPizzeria.Models
         [Range(3.00, 15.00, ErrorMessage = "Il prezzo non puo' essere minore di 3 o maggiore di 15 euro")]
         public double Price { get; set; }
 
+        public int? CategoryId { get; set; }
+
+        public Category? Category { get; set; }
+
+
         public Pizza()
         {
 

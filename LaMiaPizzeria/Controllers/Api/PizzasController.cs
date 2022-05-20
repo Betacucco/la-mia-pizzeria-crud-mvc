@@ -2,6 +2,7 @@
 using LaMiaPizzeria.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LaMiaPizzeria.Controllers.Api
 {
@@ -10,13 +11,24 @@ namespace LaMiaPizzeria.Controllers.Api
     public class PizzasController : ControllerBase
     {
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(string? ricerca)
         {
             List<Pizza> pizze = new List<Pizza>();
 
             using(PizzeriaContext db = new PizzeriaContext())
             {
-                pizze = db.Pizze.ToList<Pizza>();
+                if(ricerca != null && ricerca != "")
+                {
+                    pizze = db.Pizze
+                        .Where(pizza => pizza.Name.Contains(ricerca))
+                        .ToList<Pizza>();
+                }
+                else
+                {
+                    pizze = db.Pizze
+                        .Include(pizza => pizza.Category)
+                        .ToList<Pizza>();
+                }
             }
             return Ok(pizze);
         }
